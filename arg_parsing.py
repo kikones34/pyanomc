@@ -1,3 +1,5 @@
+""" Functions related to CLI argument parsing """
+
 def parse_args(args, arg_parsers):
     for k, v in args.items():
         if k in arg_parsers:

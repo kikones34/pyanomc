@@ -96,17 +96,17 @@ def verify_restrictions(pressed_notes, config):
     
     # piano restrictions
     if not config.no_piano_res:
-        # max notes check
-        if len(pressed_notes) > config.max_notes:
-            return f"Too many notes held at once ({len(pressed_notes)}), maximum is {config.max_notes}.\n" \
-                   f"Notes pressed at once: {', '.join(map(config.note2str, sorted_pressed_notes))}."
-    
-    # player restrictions
-    if not config.no_player_res:
         # note range check
         for n in pressed_notes:
             if not config.lowest_key <= n <= config.highest_key:
                 return f"Note out of range. Must be between {config.note2str(config.lowest_key)} and {config.note2str(config.highest_key)}."
+    
+    # player restrictions
+    if not config.no_player_res:
+        # max notes check
+        if len(pressed_notes) > config.max_notes:
+            return f"Too many notes held at once ({len(pressed_notes)}), maximum is {config.max_notes}.\n" \
+                   f"Notes pressed at once: {', '.join(map(config.note2str, sorted_pressed_notes))}."
 
         # hands & fingers check (assumes min 1 hand and 1 finger per hand)
         hand_keys = [[sorted_pressed_notes[0]]]
@@ -126,7 +126,7 @@ def verify_restrictions(pressed_notes, config):
     return None
 
 if __name__ == "__main__":
-    # automatic arg parsing from doc string
+    # automatic arg parsing from module docstring
     args = docopt(__doc__)
     if args["<file>"] is None:
         print(__doc__)
@@ -146,7 +146,7 @@ if __name__ == "__main__":
     # opens midi file and sets up some variables
     midi = mido.MidiFile(config.file)
     config.ppqn = midi.ticks_per_beat
-    config.tempo = 500000 # test
+    config.tempo = 500000 # TODO: extract this info from MIDI file
 
     # creates a list of actions (press/release note) with their associated timestamp
     actions = []
