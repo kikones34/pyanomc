@@ -16,7 +16,7 @@ Options:
   -s --span <n>         Maximum distance* between two keys played by the same hand [default: 7].
   -n --max-notes <n>    Maximum number of notes which can be held at once [default: hands*fingers].
     
-                        * white key = 1, black key = 0.5, e.g. distance from C4 to C#4 = 7.5
+                        * white key = 1, black key = 0.5, e.g. distance from C4 to C#5 = 7.5
 
   Piano restrictions:
   -l --lowest-key <n>   Lowest note which can be played [default: A0].
@@ -195,7 +195,7 @@ if __name__ == "__main__":
 """ TODO: Future features
 - Support multi-track MIDI files
 - Be measure-aware (i.e. instead of giving the time of the action in seconds, give the measure and position inside the measure)
-- Allow to have a different amount fingers on each hand
+- Allow to have a different amount of fingers on each hand
 - Add restrictions related to the speed, finger patterns, etc.
 - Take pedals into account (e.g. you can use sustain instead of keeping a note pressed to have more free fingers)
 - Recommend a fix for the fails
